@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 // import SmartApp from './SmartApp/App'
 import registerServiceWorker from './registerServiceWorker';
 //import MappingAndFiltering from './MappingAndFiltering/MappingAndFiltering'
-import ChatterApp from './ChatterApp/ChatterApp'
+import TexMexApp from './tex-mex-solution/App'
 
-ReactDOM.render(<ChatterApp />, document.getElementById('root'));
+ReactDOM.render(<TexMexApp />, document.getElementById('root'));
 registerServiceWorker();
