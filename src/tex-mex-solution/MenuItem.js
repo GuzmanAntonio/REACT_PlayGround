@@ -1,14 +1,35 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+const MenuItemStyle = {
+  container: {
+    border: '3px solid black',
+    display:'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  header: {
+
+  },
+  subHeader: {
+
+  },
+  image: {
+    marginBottom: '50px',
+    borderRadius: '10px',
+    maxWidth: '70%',
+    maxHeight: '70%'
+  }
+}
+
 const MenuItemDisplay = ({name, price, category, spiceLevel, img}) => {
   return (
-    <div>
-      <h4>{name}</h4>
-      <h4>{price}</h4>
-      <h4>{category}</h4>
-      <h4>{spiceLevel}</h4>
-      <img src={img} />
+    <div style={MenuItemStyle.container}>
+      <h4 style={MenuItemStyle.header}>{name}</h4>
+      <h4 style={MenuItemStyle.subHeader}>{price}</h4>
+      <h4 style={MenuItemStyle.subHeader}>{category}</h4>
+      <h4 style={MenuItemStyle.subHeader}>{spiceLevel}</h4>
+      <img style={MenuItemStyle.image} src={img} />
     </div>
   )
 }
