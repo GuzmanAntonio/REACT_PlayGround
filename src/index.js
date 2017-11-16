@@ -4,6 +4,6 @@ import ReactDOM from 'react-dom'
 // import SmartApp from './SmartApp/App'
 // import registerServiceWorker from './registerServiceWorker'
 // import MappingAndFiltering from './MappingAndFiltering/MappingAndFiltering'
-import App from './to-do-list-App/App'
+import App from './ToDoSolution/App'
 
 ReactDOM.render(<App />, document.getElementById('root'))
