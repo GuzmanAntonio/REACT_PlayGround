@@ -28,13 +28,15 @@ class ToDoContainer extends Component {
 
   addToDo = (e) => {
     e.preventDefault()
-    const allToDos = this.state.toDos
+    const allToDos = this.state.toDos || []
     if (this.state.title && this.state.dueDate) {
       const newToDo = {
         title: this.state.title,
         dueDate: this.state.dueDate,
         complete: false,
-        id: this.state.toDos.length + 1
+        id: this.state.toDos
+          ? this.state.toDos.length + 1
+          : 1
       }
       allToDos.push(newToDo)
       this.setState({toDos: allToDos})
@@ -49,9 +51,13 @@ class ToDoContainer extends Component {
   }
 
   sortByComplete = () => {
-    const completed = this.state.toDos.filter(item => !item.complete)
-    const incomplete = this.state.toDos.filter(item => item.complete)
-    this.setState({ completed: completed, incomplete: incomplete})
+    const completed = this.state.toDos
+      ? this.state.toDos.filter(item => !item.complete)
+      : []
+    const incomplete = this.state.toDos
+      ? this.state.toDos.filter(item => item.complete)
+      : []
+    this.setState({completed: completed, incomplete: incomplete})
   }
 
   updateTitle = (e) => {
@@ -71,6 +77,28 @@ class ToDoContainer extends Component {
     this.sortByComplete()
   }
 
+  resetToDos = () => {
+    this.setState({ toDos: [], completed: [], incomplete: [] })
+    localStorage.clear()
+    // this.sortByComplete()
+  }
+
+  deleteToDo = (e) => {
+    const theTodo = this.state.toDos.find(item => {
+      return Number(e.target.id) === Number(item.id)
+    })
+    console.log(theTodo)
+    const newArr = this.state.toDos.filter(item => {
+      return item.id !== theTodo.id
+    })
+    console.log(newArr)
+    this.setState({ toDos: newArr })
+    localStorage.setItem('toDos', JSON.stringify(newArr))
+    setTimeout(() => {
+      this.sortByComplete()
+    }, 1000)
+  }
+
   render () {
     return (
       <div>
@@ -80,7 +108,9 @@ class ToDoContainer extends Component {
           dueDate={this.state.dueDate}
           updateDueDate={this.updateDueDate}
           updateTitle={this.updateTitle}
+
         />
+        <button onClick={this.resetToDos} type='button'>Reset To Do List</button>
         <div style={list.container}>
           {
             this.state.toDos
@@ -88,6 +118,7 @@ class ToDoContainer extends Component {
                 <div style={list.container}>
                   <ToDoList toDos={this.state.completed} title={'Completed To Dos'}
                     markComplete={this.markComplete}
+                    deleteTodo={this.deleteToDo}
                   />
                   <ToDoList toDos={this.state.incomplete} title={'Incomplete To Dos'}
                     markComplete={this.markComplete}

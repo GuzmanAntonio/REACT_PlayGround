@@ -6,80 +6,92 @@ import NavigationBar from './NavigationBar'
 import Section from './Section'
 import ServicesCard from './ServicesCard'
 import ProductCard from './ProductCard'
+import {
+  BrowserRouter as Router,
+  Route
+} from 'react-router-dom'
 
 const App = () => {
   return (
-    <div>
-      <NavigationBar />
-      <Jumbotron
-        title={faker.name.title()}
-        desc={faker.lorem.sentences()}
-      />
-  <Section
-        sectionStyle='about'
-        title={'About'}
-  content={'All about us'}
-      />
-      <Section
-        sectionStyle='services'
-  title={'Services'}
-        content={'Read about our services'}
-      >
-        <div className='service-card-container'>
-          <ServicesCard
-            title={'Video Webinars'}
-  details={'Ichiban Video Webinars'}
-          />
+    <Router>
+      <div>
+        <Route exact path='/' component={Jumbotron} />
+        <Route path='/about' render={() => <div>About</div>} />
+        <Route path='/services' render={() => <div>Services</div>} />
+        <Route path='/products' render={() => <div>Products</div>} />
 
-          <ServicesCard
-            title={'Video Webinars'}
-            details={'Ichiban Video Webinars'}
-          />
+        <NavigationBar />
+        <Jumbotron
+          title={faker.name.title()}
+          desc={faker.lorem.sentences()}
+        />
+        <Section
 
-          <ServicesCard
-            title={'Video Webinars'}
-  details={'Ichiban Video Webinars'}
-          />
+          sectionStyle='about'
+          title={'About'}
+          content={'All about us'}
+        />
+        <Section
+          sectionStyle='services'
+          title={'Services'}
+          content={'Read about our services'}
+        >
+          <div className='service-card-container'>
+            <ServicesCard
+              title={'Video Webinars'}
+              details={'Ichiban Video Webinars'}
+            />
 
-          <ServicesCard
-            title={'Video Webinars'}
-  details={'Ichiban Video Webinars'}
-          />
-        </div>
-      </Section>
+            <ServicesCard
+              title={'Video Webinars'}
+              details={'Ichiban Video Webinars'}
+            />
 
-  <Section
-        sectionStyle='products'
-        title={'Products'}
-  content={'Best selling products'}
-      >
-        <ProductCard
-          product={faker.commerce.product()}
-          price={faker.commerce.price()}
-          img={faker.random.image()}
-        />
-        <ProductCard
-          product={faker.commerce.product()}
-          price={faker.commerce.price()}
-          img={faker.random.image()}
-        />
-  <ProductCard
-          product={faker.commerce.product()}
-          price={faker.commerce.price()}
-          img={faker.random.image()}
-        />
-        <ProductCard
-          product={faker.commerce.product()}
-  price={faker.commerce.price()}
-          img={faker.random.image()}
-        />
-        <ProductCard
-          product={faker.commerce.product()}
-          price={faker.commerce.price()}
-          img={faker.random.image()}
-        />
-      </Section>
-    </div>
+            <ServicesCard
+              title={'Video Webinars'}
+              details={'Ichiban Video Webinars'}
+            />
+
+            <ServicesCard
+              title={'Video Webinars'}
+              details={'Ichiban Video Webinars'}
+            />
+          </div>
+        </Section>
+
+        <Section
+          sectionStyle='products'
+          title={'Products'}
+          content={'Best selling products'}
+        >
+          <ProductCard
+            product={faker.commerce.product()}
+            price={faker.commerce.price()}
+            img={faker.random.image()}
+          />
+          <ProductCard
+            product={faker.commerce.product()}
+            price={faker.commerce.price()}
+            img={faker.random.image()}
+          />
+          <ProductCard
+            product={faker.commerce.product()}
+            price={faker.commerce.price()}
+            img={faker.random.image()}
+          />
+          <ProductCard
+            product={faker.commerce.product()}
+            price={faker.commerce.price()}
+            img={faker.random.image()}
+          />
+          <ProductCard
+            product={faker.commerce.product()}
+            price={faker.commerce.price()}
+            img={faker.random.image()}
+          />
+        </Section>
+      </div>
+    </Router>
   )
 }
 
