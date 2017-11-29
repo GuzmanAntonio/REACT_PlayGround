@@ -1,14 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const RestaurantInfo = ({name, address, phone}) => {
+const RestaurantInfo = ({ name, address, phone }) => {
   return (
     <div>
-      <h1> {name} </h1>
+      <h3>{name}</h3>
       <div>
         <p>
-          {address.street}
-          {address.suite}
+          {address.street} {address.suite}
         </p>
         <p>
           {address.city}, {address.state}
@@ -16,15 +15,13 @@ const RestaurantInfo = ({name, address, phone}) => {
         <p>
           {address.zip}
         </p>
-        <p>
-          {phone}
-        </p>
       </div>
+      <p>{phone}</p>
     </div>
   )
 }
 
-RestaurantInfo.PropTypes = {
+RestaurantInfo.propTypes = {
   name: PropTypes.string.isRequired,
   address: PropTypes.object.isRequired,
   phone: PropTypes.string.isRequired

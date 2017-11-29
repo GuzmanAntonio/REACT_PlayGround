@@ -2,6 +2,18 @@ import React, {Component} from 'react'
 import './styles.css'
 import faker from 'faker'
 import Chats from './Chat'
+import ChatForm from './ChatForm'
+
+const style = {
+  container: {
+    width: '80%',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'spaceBetween',
+    marginTop: '5%',
+    marginBottom: '10%'
+  }
+}
 
 class ChatterApp extends Component {
   state = {
@@ -65,16 +77,12 @@ class ChatterApp extends Component {
   render () {
     return (
       <div>
-        <h1>Herro From Chatter App</h1>
+        <h1>Hello From Chatter App</h1>
         {
           this.state.chats ? <Chats chats={this.state.chats} /> : 'Loading...'
         }
-        <form>
-          <input placeholder='Message' onChange={this.setMessage}/>
-          <input placeholder='Username'onChange={this.setUserName}/>
-          <input placeholder='Avatar' onChange={this.setAvatar}/>
-          <button type='submit' onClick={this.submitInfo}>Submit</button>
-        </form>
+        <h3>Add a new Chat</h3>
+        <ChatForm />
       </div>
     )
   }

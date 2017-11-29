@@ -1,40 +1,40 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const MenuItemStyle = {
+const MenuStyle = {
   container: {
     border: '3px solid black',
-    display:'flex',
+    display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingBottom: '15px'
   },
   header: {
-
+    color: '#27ae60'
   },
   subHeader: {
-
+    color: '#2ecc71'
   },
   image: {
-    marginBottom: '50px',
     borderRadius: '10px',
-    maxWidth: '70%',
-    maxHeight: '70%'
+    maxWidth: '70%'
   }
 }
 
-const MenuItemDisplay = ({name, price, category, spiceLevel, img}) => {
+const MenuItems = ({ name, price, category, spiceLevel, img }) => {
   return (
-    <div style={MenuItemStyle.container}>
-      <h4 style={MenuItemStyle.header}>{name}</h4>
-      <h4 style={MenuItemStyle.subHeader}>{price}</h4>
-      <h4 style={MenuItemStyle.subHeader}>{category}</h4>
-      <h4 style={MenuItemStyle.subHeader}>{spiceLevel}</h4>
-      <img style={MenuItemStyle.image} src={img} />
+    <div style={MenuStyle.container}>
+      <p style={MenuStyle.header}>{name}</p>
+      <p style={MenuStyle.subHeader}>{price}</p>
+      <p style={MenuStyle.subHeader}>{category}</p>
+      <p style={MenuStyle.subHeader}>{spiceLevel}</p>
+      <img style={MenuStyle.image} src={img} />
     </div>
   )
 }
 
-MenuItemDisplay.propTypes = {
+MenuItems.propTypes = {
   name: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   category: PropTypes.string.isRequired,
@@ -42,4 +42,4 @@ MenuItemDisplay.propTypes = {
   img: PropTypes.string.isRequired
 }
 
-export default MenuItemDisplay
+export default MenuItems

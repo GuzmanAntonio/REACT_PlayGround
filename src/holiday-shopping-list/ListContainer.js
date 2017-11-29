@@ -4,15 +4,11 @@ import GiftForm from './GiftForm'
 
 class ListContainer extends Component {
   state = {
-    gifts: undefined,
+    gifts: [],
     nameOfGift: undefined,
     price: undefined,
     budget: 500,
     totalPrice: undefined
-  }
-  componentDidMount () {
-    const giftArray = [{name: 'Apple TV', price: 300}, {name: 'candy', price: 3}]
-    this.setState({gifts: giftArray})
   }
   handleNameOfGiftChange = (e) => {
     this.setState({nameOfGift: e.target.value})
@@ -33,9 +29,14 @@ class ListContainer extends Component {
       alert('Total Price is Greater than Your Total Budget')
       return
     } else {
-      this.setState({gifts: newGiftList})
-      this.setState({nameOfGift: ''})
-      this.setState({priceOfGift: ''})
+      let currentBudget = this.state.budget
+      currentBudget -= giftPrice
+      this.setState({
+        budget: currentBudget,
+        gifts: newGiftList,
+        nameOfGift: '',
+        priceOfGift: ''
+      })
     }
     this.setState({gifts: newGiftList})
   }
@@ -52,6 +53,9 @@ class ListContainer extends Component {
     return (
       <div>
         <h3> List Container </h3>
+        <div>
+          <h3>Budget: ${this.state.budget}</h3>
+        </div>
         <GiftForm
           handleNameOfGiftChange={this.handleNameOfGiftChange}
           handleNameOfPriceChange={this.handleNameOfPriceChange}

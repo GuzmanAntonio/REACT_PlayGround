@@ -1,46 +1,60 @@
 import React, {Component} from 'react'
-import CODE from '../RestaurantApp/CODE'
+import data from './data'
 import MenuList from './MenuList'
-import MenuItem from './MenuItem'
 import SearchForm from './SearchForm'
 
 class MenuContainer extends Component {
-  state={
+  state = {
     menuItems: undefined,
     searchTerm: undefined
   }
-
   componentDidMount () {
-    //alert('Component Did Mount')
-    this.setState({menuItems: CODE.items})
+    this.setState({ menuItems: data.items })
   }
 
   handleSearchTermChange = (e) => {
-    this.setState({searchTerm: e.target.value})
+    this.setState({ searchTerm: e.target.value })
   }
 
   resetMenuList = () => {
-    this.setState({menuItems: CODE.items, searchTerm: ' '})
+    this.setState({ menuItems: data.items, searchTerm: '' })
   }
 
   setMenuItemsToMild = () => {
-    const mildFoods = this.state.menuItems.filter((item) => {
+    const mildFoods = this.state.menuItems.filter(item => {
       return item.spiceLevel < 4
     })
-    console.log(mildFoods)
-    this.setState({menuItems: mildFoods})
+    this.setState({ menuItems: mildFoods })
+  }
+
+  setMenuItemsToMedium = () => {
+    const mediumFoods = this.state.menuItems.filter(item => {
+      return (item.spiceLevel >= 4 && item.spiceLevel <= 7)
+    })
+    this.setState({ menuItems: mediumFoods })
+  }
+
+  setMenuItemsToSpicy = () => {
+    const spicyFoods = this.state.menuItems.filter(item => {
+      return item.spiceLevel > 7
+    })
+    this.setState({ menuItems: spicyFoods })
   }
 
   updateMenuList = (e) => {
     e.preventDefault()
-    const updateMenuList = this.state.menuItems.filter(item => {
-      const searchTerm = this.state.searchTerm.toLowerCase()
-      const menuItems = item.name.toLowerCase()
-      return menuItems.includes(searchTerm)
+
+    const {menuItems, searchTerm} = this.state
+
+    const updatedMenuItems = menuItems.filter(item => {
+      const searchTermToLowerCase = searchTerm.toLowerCase()
+      const menuItem = item.name.toLowerCase()
+      return menuItem.includes(searchTermToLowerCase)
     })
-    this.setState({menuItems: updateMenuList})
+    console.log(updatedMenuItems)
+    this.setState({ menuItems: updatedMenuItems })
   }
- 
+
   render () {
     return (
       <div>
@@ -50,15 +64,16 @@ class MenuContainer extends Component {
           resetMenuList={this.resetMenuList}
           searchTerm={this.state.searchTerm}
           setMenuItemsToMild={this.setMenuItemsToMild}
+          setMenuItemsToMedium={this.setMenuItemsToMedium}
+          setMenuItemsToSpicy={this.setMenuItemsToSpicy}
         />
         {
           this.state.menuItems
             ? <MenuList foodItems={this.state.menuItems} />
-            : <h3> You don't have menu items </h3>
+            : <h3>You don't have menu items</h3>
         }
       </div>
     )
   }
 }
-
 export default MenuContainer
